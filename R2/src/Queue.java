@@ -33,20 +33,25 @@ public class Queue implements QueueIF{
 
 	@Override
 	public void enqueue(Object token) {
-		// TODO Auto-generated method stub
+		queueLL.add(token);
 		
 	}
 
 	@Override
 	public Object dequeue() throws QueueException {
-		// TODO Auto-generated method stub
-		return null;
+		if(queueLL.isEmpty()){
+			System.out.println("ERROR: Queue is empty!");
+			System.exit(0);
+		}
+		Object yank = queueLL.get(0);
+		queueLL.remove(0);
+		return yank;
 	}
 
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return queueLL.size();
 	}
 
 

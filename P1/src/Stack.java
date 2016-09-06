@@ -47,7 +47,7 @@ public class Stack implements StackIF{
 	
 	// return the String representation of theStack
 	public String toString(){
-		return "";
+		return theStack.toString();
 	}
 	
 	public static void main(String[] args) throws StackException{
