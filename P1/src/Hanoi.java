@@ -8,16 +8,19 @@ public class Hanoi{
 	// constructor sets debug: 
 	// if debug is true, iterative Hanoi print rts every time it encounters a frame 
 	public Hanoi(boolean debug){
+		rts = new Stack();
+		this.debug = debug;
 	}
 
 	// implement
 	private void resetCount(){
 	// reset count to 0 to count the moves of a Hanoi implementation
+		this.count = 0;
 	}
 
 	// implement
 	private int getCount(){
-		return 0;
+		return this.count;
 	}
 
 	//Implement Hanoi using an explicit Run Time Stack rts
@@ -37,12 +40,30 @@ public class Hanoi{
 	//            push [2,n,from,to] , push [0,n-1,via,to]
 	//           else (in state 2) do nothing
 	private void rtsHanoi() throws StackException{
+		Frame popped = null;
 		while(!rts.isEmpty()){
 			if(debug)System.out.println("RTS: " + rts);
-			
-			
+			popped = (Frame) rts.pop();
+			int via = 6 - popped.getFrom() - popped.getTo();
+			if(popped.getN() != 0){
+				if(popped.getState() == 0){
+					rts.push(new Frame(1, popped.getN(), popped.getFrom(), popped.getTo()));
+					rts.push(new Frame(0, popped.getN() - 1, popped.getFrom(), via));
+				}
+				if(popped.getState() == 1){
+					System.out.println("move disk " + popped.getN() + 
+							" from " + popped.getFrom() + " to " + popped.getTo());
+					count++;
+					rts.push(new Frame(2, popped.getN(), popped.getFrom(), popped.getTo()));
+					rts.push(new Frame(0, popped.getN() - 1, via, popped.getTo()));
+					
+					
+				}
+			}
 		}
 	}
+			
+		
 
 	// provided
 	// iterative Hanoi using stack of frames rts

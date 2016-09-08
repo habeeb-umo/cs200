@@ -1,0 +1,26 @@
+Recursive and Iterative Hanoi: n = 2, debug = true
+
+recHanoi 2 from 1 to 3
+move disk 1 from 1 to 2
+move disk 2 from 1 to 3
+move disk 1 from 2 to 3
+number of moves: 3
+
+itHanoi 2 from 1 to 3
+RTS: [[s:0, n:2, f:1, t:3]]
+RTS: [[s:1, n:2, f:1, t:3], [s:0, n:1, f:1, t:2]]
+RTS: [[s:1, n:2, f:1, t:3], [s:1, n:1, f:1, t:2], [s:0, n:0, f:1, t:3]]
+RTS: [[s:1, n:2, f:1, t:3], [s:1, n:1, f:1, t:2]]
+move disk 1 from 1 to 2
+RTS: [[s:1, n:2, f:1, t:3], [s:2, n:1, f:1, t:2], [s:0, n:0, f:3, t:2]]
+RTS: [[s:1, n:2, f:1, t:3], [s:2, n:1, f:1, t:2]]
+RTS: [[s:1, n:2, f:1, t:3]]
+move disk 2 from 1 to 3
+RTS: [[s:2, n:2, f:1, t:3], [s:0, n:1, f:2, t:3]]
+RTS: [[s:2, n:2, f:1, t:3], [s:1, n:1, f:2, t:3], [s:0, n:0, f:2, t:1]]
+RTS: [[s:2, n:2, f:1, t:3], [s:1, n:1, f:2, t:3]]
+move disk 1 from 2 to 3
+RTS: [[s:2, n:2, f:1, t:3], [s:2, n:1, f:2, t:3], [s:0, n:0, f:1, t:3]]
+RTS: [[s:2, n:2, f:1, t:3], [s:2, n:1, f:2, t:3]]
+RTS: [[s:2, n:2, f:1, t:3]]
+number of moves: 3
