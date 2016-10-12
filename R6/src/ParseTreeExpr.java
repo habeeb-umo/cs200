@@ -38,21 +38,51 @@ public class ParseTreeExpr {
 		return tree;
 	}
 
-	// expr = number ( "+" number )*
+	// expr = term ( "+"|"-" term )*
 	// Notice that we only parse sums of terms, 
 	// not differences
 	private TreeNode expr(String indent) throws ParseException{
 		if(debug)
 			System.out.println(indent+"expr");
-
-		TreeNode left = number(indent+" ");
-		while(nextToken != null && nextToken.equals("+") ){
+		
+		
+		TreeNode left = term(indent+" ");
+		while(nextToken != null && (nextToken.equals("+") || nextToken.equals("-")) ){
 			String op = nextToken;
 			nextTok(indent+" ");
-			TreeNode right = number(indent+" ");
+			TreeNode right = term(indent+" ");
 			left = new TreeNode(op,left, right);
 		}
 		return left;
+	}
+	
+	// term = factor ( "*"|"/" factor )*
+	
+	private TreeNode term(String indent) throws ParseException{
+		if(debug)
+			System.out.println(indent+"term");
+		TreeNode left = factor(indent+" ");
+		while(nextToken != null && (nextToken.equals("*") || (nextToken.equals("/")))){
+				String op = nextToken;
+				nextTok(indent+" ");
+				TreeNode right = factor(indent+" ");	
+				left = new TreeNode(op, left, right);
+		}
+		return left;
+	}
+	
+	private TreeNode factor(String indent) throws ParseException{
+		if(debug)
+			System.out.println(indent + "number");
+		if(Character.isDigit(nextToken.charAt(0))){
+			String num = nextToken;
+			nextTok(indent);
+			return new TreeNode(num);
+		}
+		else {
+			error("number expected");
+			return null; // for java type checker
+		}
 	}
 
 	private TreeNode number(String indent) throws ParseException{
